@@ -29,3 +29,9 @@ In the last command you need to set coordinate_frame and type_mask.
 Refer to mavlink manual, that will be used in the class often.
 
 https://mavlink.io/en/messages/common.html#POSITION_TARGET_LOCAL_NED
+
+## Links 
+
+https://qiao.github.io/PathFinding.js/visual/
+
+https://github.com/shkolovy/path-finder-algorithms
