@@ -1,0 +1,14 @@
+material Bricks
+{
+ technique
+ {
+  pass
+  {
+   texture_unit
+   {
+    texture brick_texture.png
+    scale 0.15 0.15
+   }
+  }
+ }
+}

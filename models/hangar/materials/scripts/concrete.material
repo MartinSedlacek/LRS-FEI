@@ -1,0 +1,14 @@
+material Concrete
+{
+ technique
+ {
+  pass
+  {
+   texture_unit
+   {
+    texture concrete_texture.jpg
+    scale 1 1
+   }
+  }
+ }
+}

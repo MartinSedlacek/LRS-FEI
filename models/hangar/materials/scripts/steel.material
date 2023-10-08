@@ -1,0 +1,14 @@
+material Steel
+{
+ technique
+ {
+  pass
+  {
+   texture_unit
+   {
+    texture steel_regal_texture.jpg
+    scale 0.2 0.2
+   }
+  }
+ }
+}
