@@ -1,5 +1,5 @@
 # LRS-FEI
-
+A short guide on how to work with preinstalled ubuntu LRS. 
 ## Setup simulation with LRS-Ubuntu image
 1. Open terminator with LRS layout. 
 2. In 1st terminal launch gazebo: `gazebo <path_to_world>/fei_lrs_gazebo.world`

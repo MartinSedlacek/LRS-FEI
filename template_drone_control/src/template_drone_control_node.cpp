@@ -19,6 +19,9 @@ public:
         arming_client_ = this->create_client<mavros_msgs::srv::CommandBool>("mavros/cmd/arming");
         set_mode_client_ = this->create_client<mavros_msgs::srv::SetMode>("mavros/set_mode");
         takeoff_client_ = this->create_client<mavros_msgs::srv::CommandTOL>("mavros/cmd/takeoff");
+        
+        local_pos_sub_ = this->create_subscription<geometry_msgs::msg::PoseStamped>(
+            "mavros/local_position/pose", 10, std::bind(&TemplateDroneControl::local_pos_cb, this, std::placeholders::_1));
 
         // Wait for MAVROS SITL connection
         while (rclcpp::ok() && !current_state_.connected)
@@ -44,11 +47,24 @@ public:
 
         // TODO: Arm and Take Off
         RCLCPP_INFO(this->get_logger(), "Sending position command");
-
         // TODO: Implement position controller and mission commands here
     }
 
 private:
+
+    void local_pos_cb(const geometry_msgs::msg::PoseStamped::SharedPtr msg)
+    {
+        geometry_msgs::msg::PoseStamped current_local_pos_ = *msg;
+
+        // To obtain the position of the drone use this data fields withing the message, please note, that this is the local position of the drone in the NED frame so it is different to the map frame
+        // current_local_pos_.pose.position.x
+        // current_local_pos_.pose.position.y
+        // current_local_pos_.pose.position.z
+        // you can do the same for orientation, but you will not need it for this seminar
+
+
+        RCLCPP_INFO(this->get_logger(), "Current Local Position: %f, %f, %f", current_local_pos_.pose.position.x, current_local_pos_.pose.position.y, current_local_pos_.pose.position.z);
+    }
     void state_cb(const mavros_msgs::msg::State::SharedPtr msg)
     {
         current_state_ = *msg;
@@ -60,6 +76,9 @@ private:
     rclcpp::Client<mavros_msgs::srv::CommandBool>::SharedPtr arming_client_;
     rclcpp::Client<mavros_msgs::srv::SetMode>::SharedPtr set_mode_client_;
     rclcpp::Client<mavros_msgs::srv::CommandTOL>::SharedPtr takeoff_client_;
+
+    rclcpp::Subscription<geometry_msgs::msg::PoseStamped>::SharedPtr local_pos_sub_;
+
     mavros_msgs::msg::State current_state_;
 };
 
