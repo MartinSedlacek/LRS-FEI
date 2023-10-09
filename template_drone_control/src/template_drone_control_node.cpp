@@ -19,9 +19,12 @@ public:
         arming_client_ = this->create_client<mavros_msgs::srv::CommandBool>("mavros/cmd/arming");
         set_mode_client_ = this->create_client<mavros_msgs::srv::SetMode>("mavros/set_mode");
         takeoff_client_ = this->create_client<mavros_msgs::srv::CommandTOL>("mavros/cmd/takeoff");
-        
+        rmw_qos_profile_t custom_qos = rmw_qos_profile_default;
+        custom_qos.depth = 1;
+        custom_qos.reliability = RMW_QOS_POLICY_RELIABILITY_BEST_EFFORT;
+        auto qos = rclcpp::QoS(rclcpp::QoSInitialization(custom_qos.history, 1), custom_qos);
         local_pos_sub_ = this->create_subscription<geometry_msgs::msg::PoseStamped>(
-            "mavros/local_position/pose", 10, std::bind(&TemplateDroneControl::local_pos_cb, this, std::placeholders::_1));
+                "/mavros/local_position/pose", qos, std::bind(&TemplateDroneControl::local_pos_cb, this, std::placeholders::_1));
 
         // Wait for MAVROS SITL connection
         while (rclcpp::ok() && !current_state_.connected)
