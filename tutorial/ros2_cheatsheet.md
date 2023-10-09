@@ -1,8 +1,18 @@
 # ROS2 cheatsheet for the purposes of the LRS
 
-To start with examples please launch the simulation as desciber in [README](../README.md).
+## ROS2 tutorials
 
-## ROS2 workspace how to create and use
+ROS2 Nodes -> https://docs.ros.org/en/foxy/Tutorials/Beginner-CLI-Tools/Understanding-ROS2-Nodes/Understanding-ROS2-Nodes.html
+
+ROS2 Topics -> https://docs.ros.org/en/foxy/Tutorials/Beginner-CLI-Tools/Understanding-ROS2-Topics/Understanding-ROS2-Topics.html
+
+Practical example for publisher and subscriber -> https://docs.ros.org/en/foxy/Tutorials/Beginner-Client-Libraries/Writing-A-Simple-Cpp-Publisher-And-Subscriber.html
+
+
+## Preliminary: Launch the Simulation
+To start with examples please launch the simulation as descibed in [README](../README.md).
+
+## Section 1: Creating and Utilizing a ROS2 Workspace
 
 ROS2 workspace should have folder structure like this:
 ```
@@ -43,7 +53,7 @@ workspace_folder/              # Workspace root directory
 7. Now you can run packages with the command `ros2 run <package_1> <name_of_the_executable>` in our case it can be `ros2 run template_drone_control template_drone_control_node`
 8. If you have changed some of the code, you need to build your workspace again using colcon build from workspace root directory.
 
-## Basic ros2 command from console
+## Section 2: Fundamental ROS2 Console Commands
 
 Open new terminal, source your workspace with 'source <path_to_your_ws>/install/setup.bash
 
@@ -70,14 +80,14 @@ This command will list all the available topic in ros2 instance. In general you 
 
 There is similar command to list all the services -> `ros2 service list` 
 
-### Work with specific topic
+### Topics Management
 
 From the topic list lets choose important topic for LRS -> `/mavros/local_position/pose`.
 
 In this topic the local position of the simulated UAV will be located.
 
-#### Working with this topic from command line
-1. Check data available within this topic -> `ros2 topic echo /mavros/local_position/pose`
+#### Topics Management from command line
+##### Check data available within this topic -> `ros2 topic echo /mavros/local_position/pose`
 
 Expected output:
 ```
@@ -100,7 +110,7 @@ pose:
 
 ```
 
-2. Check the frequency of the topic -> `ros2 topic hz /mavros/local_position/pose`
+##### Check the frequency of the topic -> `ros2 topic hz /mavros/local_position/pose`
 Expected output:
 ```
 average rate: 1.362
@@ -112,7 +122,7 @@ average rate: 1.343
 average rate: 1.344
 	min: 0.710s max: 0.761s std dev: 0.01397s window: 9
 ```
-3. Check the data type of the message (this can be used as a reference in the code) -> `ros2 topic info  /mavros/local_position/pose`
+##### Check the data type of the message (this can be used as a reference in the code) -> `ros2 topic info  /mavros/local_position/pose`
 
 Expected output:
 ```
@@ -123,7 +133,7 @@ Subscription count: 1
 
 As you can see, there is a type of the message. You can use this information to include the right header file for a message as well as data type of the message.
 
-4. Check data field of the message (this can be used as a reference in the code) -> `ros2 interface show geometry_msgs/msg/PoseStamped`
+##### Check data field of the message (this can be used as a reference in the code) -> `ros2 interface show geometry_msgs/msg/PoseStamped`
 
 Expected output:
 ```
@@ -135,11 +145,13 @@ Pose pose
 
 Now you know that the message of type is composed of `std_msgs/msg/Header` and `geometry_msgs/msg/Pose`. You can further check the message for example using `ros2 interface show geometry_msgs/msg/Pose`. This way you can check all the available fields etc., for the message definition of standard types you can as well use documentation for example here you can check definition for `geometry_msgs` https://docs.ros2.org/latest/api/geometry_msgs/index-msg.html. For custom packages you can refer to their code in the case of mavros you can check definitions on their github: https://github.com/mavlink/mavros/tree/ros2/mavros_msgs/msg.
 
-#### Working with the topic from cpp code
+## Section 3: Implementing Topics in C++ Code
 
 To integrate some topic into your code, you need to follow a few steps. 
 
-1. You need to decide, what is the topic type and what package is it coming from. 
+### Determining Topic Type and Source Package
+
+You need to decide, what is the topic type and what package is it coming from. 
 
 From our example our message is of type `geometry_msgs/msg/PoseStamped`. This means that we need to add `geometry_msgs` package into our `CMakeLists.txt` and `package.xml`. We need to include it as a header too into our implementation file.
 
@@ -149,8 +161,12 @@ The line added in `package.xml` should look like this: [Example from template](.
 
 The include in the implementation file `template_drone_control_node.cpp` should look like this: [Example from template](../template_drone_control/src/template_drone_control_node.cpp#L2)
 
-2. Now you need to decide, if you want to publish the topic or subscribe it. Publish means, that the topic will be available for other `ros2 nodes` subscribing means, that we will obtain data from the topic (similar as we did in the console woth `ros2 topic echo`).
+### Creating Subscribers and Publishers
 
+Now you need to decide, if you want to publish the topic or subscribe it. Publish means, that the topic will be available for other `ros2 nodes` subscribing means, that we will obtain data from the topic (similar as we did in the console woth `ros2 topic echo`).
+
+
+#### Subscriber
 To create a subscriber to a topic you need to create the subsciber and then add callback that will handle the incoming data.
 
 The object subsciber can be created like this: [Example from template](../template_drone_control/src/template_drone_control_node.cpp#L81)
@@ -158,6 +174,8 @@ The object subsciber can be created like this: [Example from template](../templa
 You can initialize subsciber like this, please note, that the callback and topic name are used as parameters: [Example from template](../template_drone_control/src/template_drone_control_node.cpp#L23-L24)
 
 Callback can be defined like this, please note that in implementation of the callback there is showed how work with incoming message (this information can be optain from command line using `ros2 interface show <name of the topic>` or documentation): [Example from template](../template_drone_control/src/template_drone_control_node.cpp#L56-L68)
+
+#### Publisher
 
 To create publisher for a specific topic you need to create publisher and then initialize (it is similar as the subsciber examples can be found in the `template_drone_contol`). 
 
@@ -180,5 +198,5 @@ local_pos_pub_.publish(current_local_pos_);
 
 Please note, that in the template, there is not created the publisher that you need to control the UAV position.
 
-### Conclusion
+## Conclusion
 This tutorial can be used for different topics, that you need to work with. To use ros2 services, please refer to the template_drone_control, everything should be implemented here.
