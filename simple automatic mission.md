@@ -48,10 +48,10 @@ _Note: If a software tool is used, it must be well documented and explained in d
 
 || X | Y | Z | Precision| Task |
 |---| ---      | ---      | ---      |---  |--- |
-|1|13.60|1.5|1.00|soft|takeoff|
+|1|13.60|1.50|1.00|soft|takeoff|
 |2|8.65|2.02|1.00|soft|-|
 |3|4.84|5.37|2.00|hard|yaw180|
 |4|2.08|9.74|1.75|hard|-|
 |5|8.84|6.90|2.00|hard|landtakeoff|
-|6|2.81|8.15|1.5|soft|yaw90|
+|6|2.81|8.15|1.50|soft|yaw90|
 |7|13.60|1.50|2.00|hard|land|
