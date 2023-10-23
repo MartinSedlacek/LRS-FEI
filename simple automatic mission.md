@@ -39,7 +39,7 @@ _Note: If a software tool is used, it must be well documented and explained in d
 |---| ---      | ---      | ---      |---  |--- |
 |1| x0  | y0   | 2   | - |takeoff |
 |2| x1 | y1 | 2 | soft | yaw 90 |
-|3| x2   |   y2    |2   | hard   |land and takeoff |
+|3| x2   |   y2    |2   | hard   |landtakeoff |
 |4| x3 | y3 | 1| soft| - | 
 
 ### **Example mission 2** 
@@ -48,10 +48,10 @@ _Note: If a software tool is used, it must be well documented and explained in d
 
 || X | Y | Z | Precision| Task |
 |---| ---      | ---      | ---      |---  |--- |
-|1|13.00|7.00|2.00|soft|takeoff|
-|2|8.65|2.02|1.39|soft|-|
-|3|4.84|5.37|0.42|hard|-|
-|4|2.08|9.74|1.46|hard|-|
+|1|13.60|1.5|1.00|soft|takeoff|
+|2|8.65|2.02|1.00|soft|-|
+|3|4.84|5.37|2.00|hard|yaw180|
+|4|2.08|9.74|1.75|hard|-|
 |5|8.84|6.90|2.00|hard|landtakeoff|
-|6|2.81|8.15|2.27|soft|-|
-|7|13.00|7.00|2.00|hard|land|
+|6|2.81|8.15|1.5|soft|yaw90|
+|7|13.60|1.50|2.00|hard|land|
