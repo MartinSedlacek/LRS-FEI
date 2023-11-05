@@ -1423,7 +1423,7 @@
               <stddev>0.007</stddev>
             </noise>
           </camera>
-          <plugin name='stereo_camera_controller' filename='libgazebo_ros_multicamera.so'>
+          <plugin name='stereo_camera_controller' filename='libgazebo_ros_camera.so'>
             <alwaysOn>1</alwaysOn>
             <updateRate>0.0</updateRate>
             <cameraName>fei_lrs_drone/stereo_camera</cameraName>
