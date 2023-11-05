@@ -34,7 +34,7 @@ sudo apt install ros-foxy-gazebo-ros-pkgs # if there will be error please tell m
 sudo apt install ros-foxy-image-pipeline
 sudo apt install ros-foxy-rviz2
 ```
-3. Now you should see with `ros2 topic list`:
+3. Run gazebo `gazebo LRS-FEI/worlds/fei_lrs_gazebo_depth.world`. Now you should see with `ros2 topic list`:
 ```/clicked_point
 /clock
 /goal_pose
