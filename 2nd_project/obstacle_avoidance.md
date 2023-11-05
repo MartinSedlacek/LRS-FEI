@@ -12,7 +12,7 @@
 - It is possible to use preprogrammed moves, but more complex solutions are welcomed. 
 4. __Flight with path replanning__. 
 - Achieve flight from point A to point B, with obstacle avoidance (path replanning). Trajectory between point A and B will be straight line, you can expect, that the drone will start in point A (you don't have to fly to point A first).
-- Refer to illustration image.  
+
 
 #### **Assignment points**
 - Each section will be awarded 1/4 of total points (35), points for the last section will be awarded only if other sections are completed.
@@ -25,3 +25,34 @@
 - **Disparity won't be calculated if you are too close to an obstacle.**
 - It is possible to `"point cloud2 iterators"`, but you can iterate `sensor_msgs::PointCloud2` on your own too. (this is part of assinment so no more information will be provided)
 - You can use this snipped to create subscriber to topic (you need to integrate it into example ROS node or to your own ROS node): 
+
+### Installation guide
+1. Clone this latest repository.
+2. Install additional dependencies.
+ ```
+sudo apt install ros-foxy-gazebo-ros-pkgs # if there will be error please tell me and i will help
+sudo apt install ros-foxy-image-pipeline
+sudo apt install ros-foxy-rviz2
+```
+3. Now you should see with `ros2 topic list`:
+```/clicked_point
+/clock
+/goal_pose
+/initialpose
+/parameter_events
+/rosout
+/stereo_camera/camera_info
+/stereo_camera/depth/camera_info
+/stereo_camera/depth/image_raw
+/stereo_camera/image_raw
+/stereo_camera/points
+/tf
+/tf_static
+```
+4. Now you can open rviz2, with `rviz2` command.
+- At global options set Fixed frame to: fei_lrs_drone/stereo_cam_link
+- Add with button add topic `/stereo_camera/points'
+  - Click on button add (bottom of the window) -> click by topic -> add /points
+5. If everything works, you can see a similar image to this one ![image](../resources/depth.png)
+6. You can start to implement your solution. 
+- It is good to write subscriber to `/stereo_camera/points` first. To check the datatype you can use `ros2 topic type /stereo_camera/points` 
