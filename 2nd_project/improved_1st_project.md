@@ -36,7 +36,12 @@ To install the library you can use: `sudo apt install libpcl-dev`, to use the li
 To further process the pointcloud to voxel grid, you can refer to: https://pcl.readthedocs.io/projects/tutorials/en/latest/voxel_grid.html
 
 #### Position control with velocity inputs
-TBD
+
+Additional smoothing of the calculated trajectory. Simplest way is to use polynomials for each of the coordinates.
+A simple video explaining polynomial trajectory fitting: https://www.youtube.com/watch?v=HqQBL6xcj4w
+
+Afterwards the waypoints are sent to the autopilot using "POSVEL" or "POSVELACC" where in the typemask velocities and accelerations are not ignored. 
+
 #### Additional mission tasks
 You need to implement all of these tasks:
    - Stop (the UAV will stop and wait for command to continue, during the stop other mission commands must work) 
