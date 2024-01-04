@@ -8,7 +8,7 @@ In this assignemnt the goal is to further improve 1st assignemnt. In the next se
 2. Use pointcloud to plan the trajectory, the trajectory planning needs to be done in 3D. 
 3. Implement motion control with velocity inputs. 
 4. Implement additional mission tasks: 
-   - Stop (the UAV will stop and wait for command to continue, during the stop other mission commands must work) 
+   - Stop (the UAV will stop and wait for command to continue) 
    - Continue (continue with the predifined trajectory)
    - Circle (the UAV will make a circle around the position from which the command was called)  
 
