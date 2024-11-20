@@ -15,7 +15,7 @@ In this assignemnt the goal is to further improve 1st assignemnt. In the next se
 To satisfy this project you can choose to implement any combination of these tasks (but at least 2 needs to be done). Also in this assignemnt you need to explain the algorithms used in detail.
 
 ### **Assignment points**
-- Each feature will be awarded 1/2 of total points (35).
+- Each feature will be awarded 1/2 of total points (30).
 - **Minimal requirement is to have at least of 50% of points from this assignment, it is possible to achieve this by completing only one feature fully functional.**
 - To get all the points your drone should be able to complete the mission "autonomously". 
 
