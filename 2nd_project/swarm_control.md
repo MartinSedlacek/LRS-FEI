@@ -16,7 +16,7 @@ In this assignment you will have to control UAV swarm consisting of at least 3 U
 
  
 ### **Assignment points**
-- Each section will be awarded 1/4 of total points (35), points for the last section will be awarded only if other sections are completed.
+- Each section will be awarded 1/4 of total points (30), points for the last section will be awarded only if other sections are completed.
 - **Minimal requirement is to have at least of 50% of points from this assignment, it is possible to achieve this by completing 1. and 2. part of the mission and demostrating automatic takeoff of all of the UAVs.**
 - To get all the points your drone should be able to complete your predefined mission.
 
